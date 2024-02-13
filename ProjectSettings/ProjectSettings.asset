@@ -770,6 +770,7 @@ PlayerSettings:
       GazeInput: True
       SpatialPerception: True
       WebCam: True
+      Microphone: True
   metroTargetDeviceFamilies: {}
   metroFTAName: 
   metroFTAFileTypes: []
