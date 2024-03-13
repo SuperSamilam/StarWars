@@ -1,0 +1,98 @@
+@Sub SRSubdivision = SRSubdivisionPN
+    Tessellation = 128
+    Smoothing = 1
+@End
+
+@Sub SRSurface = SRSurfaceDetailNormalMap
+    Normal Map = @Tex file "../Textures/T_Heads_DarthMaul_01_NS_1.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_NS_1.png" srgb 0 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Scale & Bias = 1
+    Flip X = 0
+    Flip Y = 0
+    Flip Z = 1
+    Object Space = 0
+    Detail Normal Map = nil
+    UV Set = 0
+    Scale & Bias;detail = 1
+    Flip X;detail = 0
+    Flip Y;detail = 0
+    Flip Z;detail = 0
+    Detail Tiling = 1
+    Detail Offset = 0
+    Detail Weight Map = nil
+    Channel;detail = 0
+    Detail Weight = 1
+@End
+
+@Sub SRMicrosurface = SRMicrosurfaceGlossMap
+    Gloss Map = @Tex file "../Textures/T_Heads_DarthMaul_01_NS.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_NS.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Channel = 2
+    Gloss = 1
+    Invert = 0
+@End
+
+@Sub SRAlbedo = SRAlbedoMap
+    Albedo Map = @Tex file "../Textures/T_Heads_DarthMaul_01_C.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_C.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Color = 0.964823 0.833392 0.833392
+@End
+
+@Sub SRDiffusion = SRDiffusionScatter
+    Scatter Map = nil
+    Scatter Depth (mm) = 81.36
+    Scatter Color = 0.938921 0.59714 0.233531
+    Translucency Map = @Tex file "../Textures/T_Heads_DarthMaul_01_T.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_T.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Translucency = 1
+    Translucency Color = 1 0.0143499 0.0143499
+    Translucency Depth (mm) = 8000
+    Translucency Scatter = 1
+    Fuzz Map = nil
+    Fuzz = 0.056
+    Fuzz Color = 1 1 1
+    Mask Fuzz with Gloss = 0
+@End
+
+@Sub SRReflectivity = SRReflectivitySpecularMap
+    Specular Map = @Tex file "../Textures/T_Heads_DarthMaul_01_RSSSAO.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_RSSSAO.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Channel;specular = 0
+    Intensity = 0.121
+    Color = 1 1 1
+    Fresnel = 0.306
+    Fresnel Color = 1 1 1
+    Conserve Energy = 1
+@End
+
+@Sub SRReflection = SRReflectionGGX
+    Horizon Occlusion = 3.96049
+@End
+
+@Sub SRReflection2 = SRReflectionGGX
+    Horizon Occlusion = 1.3882
+    Secondary Gloss = 0.390351
+    Secondary Intensity = 1.11686
+    Secondary Intensity Color = 1 1 1
+    Secondary Fresnel = 0.517045
+    Secondary Fresnel Color = 1 1 1
+@End
+
+@Sub SROcclusion = SROcclusionMap
+    Occlusion Map = @Tex file "../Textures/T_Heads_DarthMaul_01_RSSSAO.png" fileFull "G:/!Projects/Marmoset/bundles/SWBF2_DarthMaul/Assets/Textures/T_Heads_DarthMaul_01_RSSSAO.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Channel;occlusion = 2
+    Occlusion = 1
+    UV Set = 0
+    Vertex Channel = 0
+    Cavity Map = nil
+    Channel;cavity = 2
+    Diffuse Cavity = 0
+    Specular Cavity = 1
+@End
+
+@Sub SRMerge = SRMerge
+    Texture Tiling = 1
+    Tile U = 1
+    Offset U = 0
+    Tile V = 1
+    Offset V = 0
+    Wrap = 1
+    Aniso = 2
+    Filter = 1
+@End
+

@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MRTK3_BASE_HL2_2021.sln"
+    "dotnet.defaultSolution": "StarWars.sln"
 }
