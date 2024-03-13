@@ -1,15 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
-using Microsoft.MixedReality.Toolkit;
-using MixedReality.Toolkit.Input;
+using UnityEngine;
+
 using MixedReality.Toolkit;
 using UnityEngine.XR;
-using Microsoft.MixedReality.OpenXR;
-using UnityEngine.XR.Hands.OpenXR;
 using MixedReality.Toolkit.Subsystems;
 
 public class Lightsaber : MonoBehaviour
