@@ -4,27 +4,41 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
+using Microsoft.MixedReality.Toolkit;
+using MixedReality.Toolkit.Input;
+using MixedReality.Toolkit;
+using UnityEngine.XR;
+using Microsoft.MixedReality.OpenXR;
+using UnityEngine.XR.Hands.OpenXR;
+using MixedReality.Toolkit.Subsystems;
+
 public class Lightsaber : MonoBehaviour
 {
-    public static AudioClip ignite;
-    public static AudioClip humming;
+    public AudioClip ignite;
+    public AudioClip humming;
+    public XRNode hand;
 
     AudioSource audioSource;
-    [SerializeField] int activeButton;
 
-    bool activated = false;
+
     [SerializeField] GameObject saber;
-    BoxCollider saberCollider;
     [SerializeField] Color lightSaberColor;
+    bool activated = false;
+    BoxCollider saberCollider;
     List<ParticleSystem> blades = new List<ParticleSystem>();
     List<float> lightSaberLenght = new List<float>();
-    List<float> lightSaberSpeed = new List<float>();
+
+    float time;
+    [SerializeField] float ignitionTime;
+
+    bool isPinching = false;
 
 
     void Start()
     {
         if (saber == null)
             return;
+
         audioSource = GetComponent<AudioSource>();
 
         saber = Instantiate(saber);
@@ -34,61 +48,96 @@ public class Lightsaber : MonoBehaviour
         {
             if (saber.transform.GetChild(i).GetComponent<ParticleSystem>() != null)
             {
-                Debug.Log("Found Blades");
                 blades.Add(saber.transform.GetChild(i).GetComponent<ParticleSystem>());
-                lightSaberLenght.Add(blades[i].startLifetime);
-                lightSaberSpeed.Add(blades[i].startSpeed);
-                blades[i].startColor = lightSaberColor;
+                lightSaberLenght.Add(blades[blades.Count-1].startLifetime);
             }
         }
         saberCollider = saber.GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (saber == null)
             return;
-        if (Input.GetMouseButtonDown(activeButton))
+
+        saber.transform.position = saber.transform.parent.position;
+        saber.transform.rotation = saber.transform.parent.rotation;
+
+        if (Input.GetMouseButtonDown(2) || IsPinching(hand) && !isPinching)
         {
-            Debug.Log("HERE");
             activated = !activated;
             //Turn on ligthsaber
             if (activated)
             {
+                audioSource.clip = ignite;
+                audioSource.Play();
+                audioSource.loop = false;
                 for (int i = 0; i < blades.Count; i++)
                 {
                     blades[i].gameObject.SetActive(true);
+                    blades[i].startLifetime = lightSaberLenght[i];
                 }
+                StartCoroutine(Timer(0.7f));
             }
             else
             {
-                for (int i = 0; i < blades.Count; i++)
-                {
-                    StartCoroutine(DeActivate());
-                }
+                audioSource.clip = ignite;
+                audioSource.Play();
+                audioSource.loop = false;
+                time = 0;
             }
         }
-    }
 
-    IEnumerator DeActivate()
-    {
-        while (true)
+        if (!activated && time <= ignitionTime)
         {
-            for (int i = 0; i < 5; i++)
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / ignitionTime);
+            for (int j = 0; j < blades.Count; j++)
+            {
+                blades[j].startLifetime = Mathf.Lerp(lightSaberLenght[j], 0, t);
+            }
+
+            if (t >= 0.95)
             {
                 for (int j = 0; j < blades.Count; j++)
                 {
-                    blades[j].startLifetime -= Mathf.Lerp(0, lightSaberLenght[j], i / 5);
+                    blades[j].gameObject.SetActive(false);
                 }
-                yield return new WaitForSeconds(0.3f);
+
             }
-            for (int j = 0; j < blades.Count; j++)
-            {
-                blades[j].gameObject.SetActive(false);
-                blades[j].startLifetime = lightSaberLenght[j];
-            }
+        }
+        isPinching = IsPinching(hand);
+
+    }
+
+    private IEnumerator Timer(float time)
+    {
+        while (true)
+        {
+
+            yield return new WaitForSeconds(time);
+            audioSource.loop = true;
+            audioSource.clip = humming;
+            audioSource.Play();
             break;
         }
+
     }
+
+    bool IsPinching(XRNode hand)
+    {
+        var aggregator = XRSubsystemHelpers.GetFirstRunningSubsystem<HandsAggregatorSubsystem>();
+        bool handIsValid = aggregator.TryGetPinchProgress(hand, out bool isReadyToPinch, out bool isPinching, out float pinchAmount);
+        return isPinching;
+    }
+
+    void OnValidate()
+    {
+        for (int j = 0; j < blades.Count; j++)
+        {
+            blades[j].startColor = lightSaberColor;
+        }
+
+    }
+
 }
