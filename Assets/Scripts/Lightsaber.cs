@@ -1,50 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Lightsaber : MonoBehaviour
 {
+    public static AudioClip ignite;
+    public static AudioClip humming;
 
-    bool leftActivated = false;
-    [SerializeField] GameObject leftSaber;
-    [SerializeField] GameObject leftBlade;
+    AudioSource audioSource;
+    [SerializeField] int activeButton;
 
-    bool rightActivated = false;
-    [SerializeField] GameObject rightSaber;
-    [SerializeField] GameObject rightBlade;
+    bool activated = false;
+    [SerializeField] GameObject saber;
+    BoxCollider saberCollider;
+    [SerializeField] Color lightSaberColor;
+    List<ParticleSystem> blades = new List<ParticleSystem>();
+    List<float> lightSaberLenght = new List<float>();
+    List<float> lightSaberSpeed = new List<float>();
+
 
     void Start()
     {
+        if (saber == null)
+            return;
+        audioSource = GetComponent<AudioSource>();
 
+        saber = Instantiate(saber);
+        saber.transform.parent = gameObject.transform;
+        saber.transform.position = Vector3.zero;
+        for (int i = 0; i < saber.transform.childCount; i++)
+        {
+            if (saber.transform.GetChild(i).GetComponent<ParticleSystem>() != null)
+            {
+                Debug.Log("Found Blades");
+                blades.Add(saber.transform.GetChild(i).GetComponent<ParticleSystem>());
+                lightSaberLenght.Add(blades[i].startLifetime);
+                lightSaberSpeed.Add(blades[i].startSpeed);
+                blades[i].startColor = lightSaberColor;
+            }
+        }
+        saberCollider = saber.GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     leftActivated = true;
-        // }
-
-        if (Input.GetMouseButtonDown(1))
+        if (saber == null)
+            return;
+        if (Input.GetMouseButtonDown(activeButton))
         {
-            rightActivated = false;
+            Debug.Log("HERE");
+            activated = !activated;
+            //Turn on ligthsaber
+            if (activated)
+            {
+                for (int i = 0; i < blades.Count; i++)
+                {
+                    blades[i].gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < blades.Count; i++)
+                {
+                    StartCoroutine(DeActivate());
+                }
+            }
         }
+    }
 
-
-        // if (leftActivated)
-        // {
-        //     leftBlade.SetActive(true);
-        // }
-        // else
-        //     leftBlade.SetActive(false);
-
-
-        if (rightActivated)
+    IEnumerator DeActivate()
+    {
+        while (true)
         {
-            rightBlade.SetActive(true);
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < blades.Count; j++)
+                {
+                    blades[j].startLifetime -= Mathf.Lerp(0, lightSaberLenght[j], i / 5);
+                }
+                yield return new WaitForSeconds(0.3f);
+            }
+            for (int j = 0; j < blades.Count; j++)
+            {
+                blades[j].gameObject.SetActive(false);
+                blades[j].startLifetime = lightSaberLenght[j];
+            }
+            break;
         }
-        else
-            rightBlade.SetActive(false);
     }
 }
