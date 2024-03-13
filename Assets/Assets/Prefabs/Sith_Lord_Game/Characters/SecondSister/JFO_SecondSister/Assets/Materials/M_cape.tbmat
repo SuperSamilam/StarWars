@@ -1,0 +1,70 @@
+@Sub SRSurface = SRSurfaceDetailNormalMap
+    Normal Map = @Tex file "../Textures/cape_N.png" fileFull "G:/!Projects/Marmoset/bundles/JFO_SeventhSister/Assets/Textures/cape_N.png" srgb 0 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Scale & Bias = 1
+    Flip X = 0
+    Flip Y = 1
+    Flip Z = 0
+    Object Space = 0
+    Detail Normal Map = @Tex file "../Textures/Coat_Fabric_Detail_N.png" fileFull "G:/!Projects/Marmoset/bundles/JFO_SeventhSister/Assets/Textures/Coat_Fabric_Detail_N.png" srgb 0 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    UV Set = 0
+    Scale & Bias;detail = 1
+    Flip X;detail = 0
+    Flip Y;detail = 0
+    Flip Z;detail = 0
+    Detail Tiling = 15
+    Detail Offset = 0
+    Detail Weight Map = @Tex file "../Textures/cape_CM.png" fileFull "G:/!Projects/Marmoset/bundles/JFO_SeventhSister/Assets/Textures/cape_CM.png" srgb 0 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Channel;detail = 0
+    Detail Weight = 1
+@End
+
+@Sub SRMicrosurface = SRMicrosurfaceAdvancedMap
+    Microsurface Map = @Tex file "../Textures/cape_RMA.png" fileFull "G:/!Projects/Marmoset/bundles/JFO_SeventhSister/Assets/Textures/cape_RMA.png" srgb 0 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Channel = 0
+    Mode = 0
+    Maximum = 0.574257
+    Minimum = 0
+    Exponent = 1
+    Horizon Smoothing = 0
+@End
+
+@Sub SRAlbedo = SRAlbedoMap
+    Albedo Map = @Tex file "../Textures/cape_C.png" fileFull "G:/!Projects/Marmoset/bundles/JFO_SeventhSister/Assets/Textures/cape_C.png" srgb 1 filter 1 mip 1 aniso 4 wrap 1 visible 1 @EndTex
+    Color = 1 1 1
+@End
+
+@Sub SRDiffusion = SRDiffusionLambertian
+@End
+
+@Sub SRReflectivity = SRReflectivitySpecularMap
+    Specular Map = nil
+    Channel;specular = 4
+    Intensity = 0
+    Color = 0.9 0.9 0.9
+    Fresnel = 1
+    Fresnel Color = 1 1 1
+    Conserve Energy = 1
+@End
+
+@Sub SRReflection = SRReflectionGGX
+    Horizon Occlusion = 1
+@End
+
+@Sub SRTransparency = SRTransparencyDither
+    Use Albedo Alpha = 1
+    Alpha Map = nil
+    Channel = 3
+    Alpha = 1
+@End
+
+@Sub SRMerge = SRMerge
+    Texture Tiling = 1
+    Tile U = 1
+    Offset U = 0
+    Tile V = 1
+    Offset V = 0
+    Wrap = 1
+    Aniso = 2
+    Filter = 1
+@End
+
