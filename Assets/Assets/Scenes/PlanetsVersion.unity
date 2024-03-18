@@ -199,11 +199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f7ddff453fb06448a9a0d3dab9b92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTracker: {fileID: 676933221}
   hand: 5
   mask:
     serializedVersion: 2
     m_Bits: 8
+  greenMat: {fileID: 2100000, guid: 639547506cb94e54aba95d81608a12bf, type: 2}
+  redMat: {fileID: 2100000, guid: 583e757ea6b72d244aab28150cbaf598, type: 2}
 --- !u!4 &676933225
 Transform:
   m_ObjectHideFlags: 0
