@@ -199,13 +199,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f7ddff453fb06448a9a0d3dab9b92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 1600797618}
   righthand: 5
   leftHand: 4
   mask:
     serializedVersion: 2
     m_Bits: 8
   greenMat: {fileID: 2100000, guid: 639547506cb94e54aba95d81608a12bf, type: 2}
-  redMat: {fileID: 2100000, guid: 583e757ea6b72d244aab28150cbaf598, type: 2}
+  redMat: {fileID: 2100000, guid: 925881c8a1c518a46806b0e3cf555ed5, type: 2}
 --- !u!4 &347795808
 Transform:
   m_ObjectHideFlags: 0
@@ -245,7 +246,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507476014}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff28e40f436aa204ab148aa7084b7ff3, type: 3}
@@ -554,10 +555,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653c9bc37c01db64fb137510a7003a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planets: []
+  level: {fileID: 11400000, guid: f0efb7b38dffa094fbf0598f7738318a, type: 2}
+  playerPlanets: []
   enemyPlanets: []
-  enemyShip: {fileID: 0}
-  playerShip: {fileID: 0}
+  noOwnerPlanets: []
 --- !u!4 &1600797619
 Transform:
   m_ObjectHideFlags: 0
