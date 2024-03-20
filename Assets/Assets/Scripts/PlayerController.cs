@@ -6,10 +6,13 @@ using MixedReality.Toolkit;
 using MixedReality.Toolkit.Input;
 using UnityEngine.XR;
 using MixedReality.Toolkit.Subsystems;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    public XRNode hand;
+    public XRNode righthand;
+    public XRNode leftHand;
+    bool pinching;
     public LayerMask mask;
 
     public Material greenMat;
@@ -26,29 +29,48 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (focusedPlanet != null)
-            focusedPlanet.gameObject.GetComponent<Renderer>().material = focusedMaterial;
+
         if (GetPointerPos(out GameObject hit))
         {
-            // if (focusedPlanet != null)
-            //     if (focusedPlanet != hit)
-            //     {
-            //         focusedPlanet.gameObject.GetComponent<Renderer>().material = focusedMaterial;
-            //     }
+            if (IsPinching(righthand) && !pinching)
+            {
+                if (focusedPlanet != null && focusedPlanet != hit)
+                    focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
 
+                if (focusedPlanet != null && focusedPlanet == hit)
+                {
+                    print(focusedMaterial.name);
+                    focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
+                    focusedPlanet = null;
+                    pinching = IsPinching(righthand);
+                    return;
+                }
 
-            Renderer renderer = hit.gameObject.GetComponent<Renderer>();
-            focusedPlanet = hit;
-            focusedMaterial = renderer.material;
-            renderer.materials = new Material[] { renderer.material, greenMat };
-
+                Renderer renderer = hit.gameObject.GetComponent<Renderer>();
+                focusedPlanet = hit;
+                focusedMaterial = renderer.material;
+                renderer.materials = new Material[] { renderer.material, greenMat };
+            }
         }
-        else
-        {
-            if (focusedPlanet != null)
-                focusedPlanet.gameObject.GetComponent<Renderer>().material = focusedMaterial;
 
-        }
+        // if (focusedPlanet != null && focusedPlanet != hit)
+        //     focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
+
+
+        // Renderer renderer = hit.gameObject.GetComponent<Renderer>();
+        // focusedPlanet = hit.gameObject;
+        // focusedMaterial = renderer.material;
+        // renderer.materials = new Material[] { renderer.material, greenMat };
+        // else
+        // {
+        //     if (focusedPlanet != null)
+        //     {
+        //         focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
+        //     }
+        // }
+
+        pinching = IsPinching(righthand);
+
 
     }
 
@@ -76,15 +98,12 @@ public class PlayerController : MonoBehaviour
     bool GetPointerPos(out GameObject hitObj)
     {
         hitObj = null;
-        var aggregator = XRSubsystemHelpers.GetFirstRunningSubsystem<HandsAggregatorSubsystem>();
-        bool sucsess = aggregator.TryGetJoint(TrackedHandJoint.IndexTip, hand, out HandJointPose pose);
-        if (sucsess == false)
-            return false;
-        Ray ray = new Ray(pose.Position, (-pose.Up + pose.Forward) / 2 * 10000f);
 
-
-        Debug.DrawRay(pose.Position, (-pose.Up + pose.Forward) / 2 * 10000f, Color.red, Time.deltaTime);
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward * 1000f);
         RaycastHit hit;
+
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 1000f, Color.red, Time.deltaTime);
+
         if (Physics.Raycast(ray, out hit, 1000000, mask))
         {
             hitObj = hit.transform.gameObject;

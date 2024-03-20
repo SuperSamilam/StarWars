@@ -8,6 +8,9 @@
         },
         {
             "m_Id": "ad00430130a9459d83004f39224afec2"
+        },
+        {
+            "m_Id": "74ac75809b784033ade84bc9e9cd29aa"
         }
     ],
     "m_Keywords": [],
@@ -41,6 +44,9 @@
         },
         {
             "m_Id": "74256d36e0f14430a9f6986be81acc5c"
+        },
+        {
+            "m_Id": "1701b215abd946bbbf6f6071ec22a53b"
         }
     ],
     "m_GroupDatas": [],
@@ -128,6 +134,9 @@
         "m_Blocks": [
             {
                 "m_Id": "148a2cdd2b1a4cd7892c271abd13df3e"
+            },
+            {
+                "m_Id": "1701b215abd946bbbf6f6071ec22a53b"
             }
         ]
     },
@@ -257,6 +266,39 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "1701b215abd946bbbf6f6071ec22a53b",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "86e970b58f0c4a99ad45c3778b022a5b"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "64060b4b1df444068af11940a379527a",
     "m_Group": {
@@ -358,6 +400,33 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "74ac75809b784033ade84bc9e9cd29aa",
+    "m_Guid": {
+        "m_GuidSerialized": "b7b4cab2-3355-4689-a77c-bfda1a62bfc5"
+    },
+    "m_Name": "OutlineFade",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "OutlineFade",
+    "m_DefaultReferenceName": "_OutlineFade",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.5,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
     "m_ObjectId": "776617edcd99433ba332bf9dc89d7be2",
@@ -389,7 +458,7 @@
         "m_Id": "e3701a29a90146cca81d2f87191ee568"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
@@ -399,6 +468,21 @@
     "m_ReceiveShadows": true,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "86e970b58f0c4a99ad45c3778b022a5b",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
 }
 
 {
@@ -589,8 +673,8 @@
     "m_Hidden": false,
     "m_Value": {
         "r": 0.0,
-        "g": 0.0,
-        "b": 0.0,
+        "g": 0.9562783241271973,
+        "b": 1.0,
         "a": 0.0
     },
     "isMainColor": false,
@@ -779,6 +863,9 @@
         },
         {
             "m_Id": "ad00430130a9459d83004f39224afec2"
+        },
+        {
+            "m_Id": "74ac75809b784033ade84bc9e9cd29aa"
         }
     ]
 }
