@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.XR;
+using MixedReality.Toolkit;
+using MixedReality.Toolkit.Subsystems;
+using MixedReality.Toolkit.Input;
 using UnityEngine.UI;
 
 public class Gamemanager : MonoBehaviour
 {
     [Header("General")]
-    public LevelSystem level;
+    public static LevelSystem level;
 
 
-    public List<GameObject> playerPlanets;
-    public List<GameObject> enemyPlanets;
-    public List<GameObject> noOwnerPlanets;
+    public static List<GameObject> playerPlanets =  new List<GameObject>();
+    public static List<GameObject> enemyPlanets = new List<GameObject>();
+    public static List<GameObject> noOwnerPlanets = new List<GameObject>();
 
     void Start()
     {
         LoadLevel();
     }
 
-    public void LoadLevel()
+    void LoadLevel()
     {
         bool playerHasPlanet = false;
         bool enemyHasPlanet = false;
@@ -125,7 +129,7 @@ public class Gamemanager : MonoBehaviour
         }
     }
 
-    public void Attack(GameObject planet, GameObject victim)
+    public static void Attack(GameObject planet, GameObject victim)
     {
         //Get all ships that will attack the victim planet
         List<GameObject> ships = new List<GameObject>();
@@ -142,5 +146,31 @@ public class Gamemanager : MonoBehaviour
             }
             i++;
         }
+    }
+
+    public static bool IsPinching(XRNode hand)
+    {
+        var aggregator = XRSubsystemHelpers.GetFirstRunningSubsystem<HandsAggregatorSubsystem>();
+        aggregator.TryGetJoint(TrackedHandJoint.IndexTip, hand, out HandJointPose pose);
+
+        bool handIsValid = aggregator.TryGetPinchProgress(hand, out bool isReadyToPinch, out bool isPinching, out float pinchAmount);
+        return isPinching;
+    }
+
+    public static bool GetPointerPos(out GameObject hitObj, LayerMask mask)
+    {
+        hitObj = null;
+
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward * 1000f);
+        RaycastHit hit;
+
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 1000f, Color.red, Time.deltaTime);
+
+        if (Physics.Raycast(ray, out hit, 1000000, mask))
+        {
+            hitObj = hit.transform.gameObject;
+            return true;
+        }
+        return false;
     }
 }

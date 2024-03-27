@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    static Gamemanager manager;
     static float minSpeed = 30;
     static float maxSpeed = 40;
     static float straightSpeed = 0.005f;
@@ -18,7 +17,6 @@ public class Ship : MonoBehaviour
 
     void Start()
     {
-        manager = FindObjectOfType<Gamemanager>();
         orbitSpeed = Random.Range(minSpeed, maxSpeed);
     }
     void Update()
@@ -64,26 +62,26 @@ public class Ship : MonoBehaviour
 
         if (owner == Owner.Enemy)
         {
-            manager.noOwnerPlanets.Remove(target.gameObject);
-            manager.playerPlanets.Remove(target.gameObject);
-            manager.enemyPlanets.Add(target.gameObject);
+            Gamemanager.noOwnerPlanets.Remove(target.gameObject);
+            Gamemanager.playerPlanets.Remove(target.gameObject);
+            Gamemanager.enemyPlanets.Add(target.gameObject);
         }
         else
         {
-            manager.noOwnerPlanets.Remove(target.gameObject);
-            manager.enemyPlanets.Remove(target.gameObject);
-            manager.playerPlanets.Add(target.gameObject);
+            Gamemanager.noOwnerPlanets.Remove(target.gameObject);
+            Gamemanager.enemyPlanets.Remove(target.gameObject);
+            Gamemanager.playerPlanets.Add(target.gameObject);
         }
 
         target.gameObject.GetComponent<Planet>().owner = owner;
-        if (owner == Owner.Player && manager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = manager.level.jediShip;
+        if (owner == Owner.Player && Gamemanager.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.jediShip;
         else if (owner == Owner.Player)
-            target.gameObject.GetComponent<Planet>().shipPrefab = manager.level.sithShip;
-        else if (owner == Owner.Enemy && manager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = manager.level.sithShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.sithShip;
+        else if (owner == Owner.Enemy && Gamemanager.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.sithShip;
         else if (owner == Owner.Enemy)
-            target.gameObject.GetComponent<Planet>().shipPrefab = manager.level.jediShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.jediShip;
 
 
     }
