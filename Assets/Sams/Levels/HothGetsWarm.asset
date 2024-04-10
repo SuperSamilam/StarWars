@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planets:
   - planet: {fileID: 5490811067645677389, guid: c970e8da389d2f948ac8be0700e75b88, type: 3}
-    position: {x: -3.08, y: 0, z: -4.21}
+    position: {x: -5.08, y: 0, z: -6.21}
     owner: 0
   - planet: {fileID: 7200679272724334082, guid: 696cc01eada55b84b8b02086ad230742, type: 3}
-    position: {x: -3.61, y: -1.61, z: 2.01}
+    position: {x: -4.61, y: -1.61, z: 4.01}
     owner: 1
   - planet: {fileID: 8607142605533395282, guid: bed1d002097357245b561de0960a3990, type: 3}
-    position: {x: 1.89, y: 1.42, z: 2.01}
+    position: {x: 4.89, y: 2.42, z: 3.01}
     owner: 0
   - planet: {fileID: 4114684108860178302, guid: 9ad521a91f8b3bf4893ce221def839e8, type: 3}
-    position: {x: 3.77, y: 1.29, z: -2.22}
+    position: {x: 7.77, y: 2.29, z: -5.22}
     owner: 2
   startShipAmount: 3
   shipSpawnTime: 20

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6848278057510228765}
   - component: {fileID: 8713638265408661463}
   - component: {fileID: 8844413021715936392}
+  - component: {fileID: 6999909927545123387}
   m_Layer: 3
   m_Name: Mustafar_Game
   m_TagString: Untagged
@@ -99,4 +100,17 @@ MonoBehaviour:
   shipPrefab: {fileID: 0}
   timeBetweenShipSpawn: 0
   owner: 0
-  attacking: 0
+  haveAttacked: 0
+--- !u!135 &6999909927545123387
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200679272724334082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.010000007
+  m_Center: {x: 0.0000000037252903, y: -0.0000000041909507, z: 0}

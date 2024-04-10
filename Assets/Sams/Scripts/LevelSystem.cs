@@ -20,7 +20,7 @@ public class LevelSystem : ScriptableObject
 
 }
 
-[System.Serializable]
+[System.Serializable] //making it vissble in the inspector
 public struct PlanetInfo
 {
     public GameObject planet;

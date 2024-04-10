@@ -10,23 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f26f6eea1663b947836ab6b84889706, type: 3}
-  m_Name: MusafarGetsCold
+  m_Name: EwoksRevenge
   m_EditorClassIdentifier: 
   planets:
-  - planet: {fileID: 5490811067645677389, guid: c970e8da389d2f948ac8be0700e75b88, type: 3}
-    position: {x: -5.08, y: 0, z: -6.21}
-    owner: 1
-  - planet: {fileID: 7200679272724334082, guid: 696cc01eada55b84b8b02086ad230742, type: 3}
-    position: {x: -4.61, y: -1.61, z: 4.01}
-    owner: 0
-  - planet: {fileID: 8607142605533395282, guid: bed1d002097357245b561de0960a3990, type: 3}
-    position: {x: 4.89, y: 2.42, z: 3.01}
-    owner: 2
   - planet: {fileID: 4114684108860178302, guid: 9ad521a91f8b3bf4893ce221def839e8, type: 3}
-    position: {x: 7.77, y: 2.29, z: -5.22}
+    position: {x: -3.82, y: 1.988, z: -5.3}
     owner: 0
+  - planet: {fileID: 8402733621055229572, guid: 809491eb3049c49478a6f55a33fbe624, type: 3}
+    position: {x: -3.07, y: -1.06, z: 9.41}
+    owner: 2
+  - planet: {fileID: 8607142605533395282, guid: bed1d002097357245b561de0960a3990, type: 3}
+    position: {x: 7.06, y: 0.53, z: 6.12}
+    owner: 2
+  - planet: {fileID: 7200679272724334082, guid: 696cc01eada55b84b8b02086ad230742, type: 3}
+    position: {x: 8.481815, y: 0, z: -6.258875}
+    owner: 1
+  - planet: {fileID: 5490811067645677389, guid: c970e8da389d2f948ac8be0700e75b88, type: 3}
+    position: {x: -9.797541, y: 0.75, z: 3.09}
+    owner: 2
   startShipAmount: 3
   shipSpawnTime: 20
-  playingAsJedi: 0
+  playingAsJedi: 1
   sithShip: {fileID: 7292360061203165146, guid: ceecf18d80ff5d049ac5c3086fb384aa, type: 3}
   jediShip: {fileID: 2973161832306829578, guid: e9767c001cee29b4b8c0deed6212a13a, type: 3}

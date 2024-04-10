@@ -7,16 +7,17 @@ public class Planet : MonoBehaviour
     public GameObject shipPrefab;
     public float timeBetweenShipSpawn;
     public Owner owner;
-    public bool attacking = false;
+    public bool haveAttacked = false;
 
     void Start()
     {
         InvokeRepeating("SpawnShip", 0, timeBetweenShipSpawn);
     }
-
+    
+    //Spawns new ship
     public void SpawnShip()
     {
-        attacking = false;
+        haveAttacked = false;
         if (shipPrefab == null)
             return;
 

@@ -11,14 +11,17 @@ public class LevelChooser : MonoBehaviour
     [SerializeField] XRNode hand;
     [SerializeField] LayerMask mask;
     [SerializeField] TextMeshProUGUI levelName;
-    
+
     //Varibels that will be used inbetween 
     GameObject focusedPlanet;
     Material focusedMaterial;
+    bool pinching;
+
 
 
     void Update()
     {
+        //Get the planet looked at and if clicked load it
         if (Gamemanager.GetPointerPos(out GameObject hit, mask))
         {
             Renderer renderer = hit.gameObject.GetComponent<Renderer>();
@@ -30,11 +33,11 @@ public class LevelChooser : MonoBehaviour
 
             levelName.gameObject.SetActive(true);
 
-            if (Gamemanager.IsPinching(hand))
+            if (Gamemanager.IsPinching(hand) && !pinching)
             {
                 if (hit.GetComponent<LevelHolder>().level != null)
                     Gamemanager.level = hit.GetComponent<LevelHolder>().level;
-                SceneManager.LoadScene(sceneBuildIndex:hit.GetComponent<LevelHolder>().index);
+                SceneManager.LoadScene(sceneBuildIndex: hit.GetComponent<LevelHolder>().index);
             }
         }
         else
@@ -44,5 +47,6 @@ public class LevelChooser : MonoBehaviour
             focusedPlanet = null;
             levelName.gameObject.SetActive(false);
         }
+        pinching = Gamemanager.IsPinching(hand);
     }
 }

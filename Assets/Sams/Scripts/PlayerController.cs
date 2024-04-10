@@ -11,37 +11,43 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
 
-    public XRNode righthand;
-    public XRNode leftHand;
-    public LayerMask mask;
+    Gamemanager gamemanager;
+    [SerializeField] XRNode righthand;
+    [SerializeField] XRNode leftHand;
+    [SerializeField] LayerMask mask;
 
-    public Material greenMat;
-    public Material redMat;
+    [SerializeField] Material greenMat;
+    [SerializeField] Material redMat;
 
 
     bool pinching;
+    bool firstPinch = false;
+
+    //using to rember the planets states
     GameObject focusedPlanet;
     Material focusedMaterial;
-
     GameObject enemyPlanet;
     Material enemyMat;
 
-    bool firstPinch = false;
 
     void Start()
     {
-
+        gamemanager = FindObjectOfType<Gamemanager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("Running");
+        //Get the middle pos of the screen and make sure the pinch is this frame, first time and on your planet
         if (Gamemanager.GetPointerPos(out GameObject hit, mask))
         {
-            if (Gamemanager.IsPinching(righthand) && !pinching && Gamemanager.playerPlanets.Contains(hit) && !firstPinch)
+            Debug.Log("Yes");
+            if (Gamemanager.IsPinching(righthand) && !pinching && gamemanager.WhoOwnsPlanet(Owner.Player, hit) && !firstPinch)
             {
+                Debug.Log("Pinched");
                 
+                //Make sure focusplanet gets reset and assign a new one with the correct value
                 if (focusedPlanet != null && focusedPlanet != hit)
                 {
                     focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
@@ -49,10 +55,8 @@ public class PlayerController : MonoBehaviour
                     pinching = Gamemanager.IsPinching(righthand);
                     return;
                 }
-
-                if (focusedPlanet != null && focusedPlanet == hit)
+                else if (focusedPlanet != null && focusedPlanet == hit)
                 {
-                    print(focusedMaterial.name);
                     focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
                     focusedPlanet = null;
                     firstPinch = false;
@@ -67,32 +71,31 @@ public class PlayerController : MonoBehaviour
                 firstPinch = true;
             }
 
-            if (Gamemanager.noOwnerPlanets.Contains(hit) && firstPinch || Gamemanager.enemyPlanets.Contains(hit) && firstPinch)
+            //If another plaanet is hit, and a planet is selected
+            if (gamemanager.WhoOwnsPlanet(Owner.None, hit) && firstPinch || gamemanager.WhoOwnsPlanet(Owner.Enemy, hit) && firstPinch)
             {
+                //set up the vissulazation
                 Renderer renderer = hit.gameObject.GetComponent<Renderer>();
                 enemyPlanet = hit;
                 enemyMat = renderer.material;
                 renderer.materials = new Material[] { renderer.material, redMat };
-                
+
+                //attack and reset values
                 if (Gamemanager.IsPinching(righthand) && !pinching)
                 {
                     Gamemanager.Attack(focusedPlanet, enemyPlanet);
                     
-                    if (enemyPlanet != null)
-                        enemyPlanet.GetComponent<Renderer>().materials = new Material[] { enemyMat };
+                    enemyPlanet.GetComponent<Renderer>().materials = new Material[] { enemyMat };
                     enemyPlanet = null;
                 }
             }
-        }
+        } //pitch in the air is resetting everything
         else if (Gamemanager.IsPinching(righthand) && !pinching)
         {
-            Debug.Log("notpiching anymore");
             firstPinch = false;
             if (focusedPlanet != null)
                 focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
             focusedPlanet = null;
-            pinching = Gamemanager.IsPinching(righthand);
-            return;
         }
         else
         {
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
             enemyPlanet = null;
         }
 
-
+        //checking if im pinching this frame
         pinching = Gamemanager.IsPinching(righthand);
     }
 }
