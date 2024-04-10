@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f26f6eea1663b947836ab6b84889706, type: 3}
+  m_Name: HothGetsWarm
+  m_EditorClassIdentifier: 
+  planets:
+  - planet: {fileID: 5490811067645677389, guid: c970e8da389d2f948ac8be0700e75b88, type: 3}
+    position: {x: -3.08, y: 0, z: -4.21}
+    owner: 0
+  - planet: {fileID: 7200679272724334082, guid: 696cc01eada55b84b8b02086ad230742, type: 3}
+    position: {x: -3.61, y: -1.61, z: 2.01}
+    owner: 1
+  - planet: {fileID: 8607142605533395282, guid: bed1d002097357245b561de0960a3990, type: 3}
+    position: {x: 1.89, y: 1.42, z: 2.01}
+    owner: 0
+  - planet: {fileID: 4114684108860178302, guid: 9ad521a91f8b3bf4893ce221def839e8, type: 3}
+    position: {x: 3.77, y: 1.29, z: -2.22}
+    owner: 2
+  startShipAmount: 3
+  shipSpawnTime: 20
+  playingAsJedi: 1
+  sithShip: {fileID: 7292360061203165146, guid: ceecf18d80ff5d049ac5c3086fb384aa, type: 3}
+  jediShip: {fileID: 2973161832306829578, guid: e9767c001cee29b4b8c0deed6212a13a, type: 3}

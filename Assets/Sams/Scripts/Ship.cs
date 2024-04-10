@@ -46,10 +46,8 @@ public class Ship : MonoBehaviour
     {
         for (int i = target.childCount - 1; i >= 0; i--)
         {
-            Debug.Log("running");
             if (target.GetChild(i).GetComponent<Ship>().owner != owner)
             {
-                Debug.Log("In here");
                 Destroy(target.GetChild(i).gameObject);
                 Destroy(this.gameObject);
                 return;

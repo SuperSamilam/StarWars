@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.XR;
 using MixedReality.Toolkit;
@@ -74,7 +73,7 @@ public class Gamemanager : MonoBehaviour
 
         for (int i = 0; i < level.planets.Count; i++)
         {
-            GameObject planet = Instantiate(level.planets[i].planet, level.planets[i].position, quaternion.identity);
+            GameObject planet = Instantiate(level.planets[i].planet, level.planets[i].position, Quaternion.identity);
             Planet planetScript = planet.GetComponent<Planet>();
             planetScript.timeBetweenShipSpawn = level.shipSpawnTime;
             if (level.planets[i].owner != Owner.None)

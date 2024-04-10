@@ -7,20 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelChooser : MonoBehaviour
 {
-
-    public Material greenMat;
-    public XRNode rightHand;
-    public LayerMask mask;
-    public TextMeshProUGUI levelName;
-    bool pinching;
-
+    [SerializeField] Material heighLightMat;
+    [SerializeField] XRNode hand;
+    [SerializeField] LayerMask mask;
+    [SerializeField] TextMeshProUGUI levelName;
+    
+    //Varibels that will be used inbetween 
     GameObject focusedPlanet;
     Material focusedMaterial;
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -29,15 +24,17 @@ public class LevelChooser : MonoBehaviour
             Renderer renderer = hit.gameObject.GetComponent<Renderer>();
             focusedPlanet = hit;
             focusedMaterial = renderer.material;
-            renderer.materials = new Material[] { renderer.material, greenMat };
+            renderer.materials = new Material[] { renderer.material, heighLightMat };
+
             levelName.text = hit.gameObject.name;
+
             levelName.gameObject.SetActive(true);
 
-
-            if (Gamemanager.IsPinching(rightHand) && !pinching)
+            if (Gamemanager.IsPinching(hand))
             {
-                Gamemanager.level = hit.GetComponent<LevelHolder>().level;
-                SceneManager.LoadScene (sceneBuildIndex:3);
+                if (hit.GetComponent<LevelHolder>().level != null)
+                    Gamemanager.level = hit.GetComponent<LevelHolder>().level;
+                SceneManager.LoadScene(sceneBuildIndex:hit.GetComponent<LevelHolder>().index);
             }
         }
         else
@@ -47,10 +44,5 @@ public class LevelChooser : MonoBehaviour
             focusedPlanet = null;
             levelName.gameObject.SetActive(false);
         }
-
     }
-
-
-
-
 }

@@ -14,12 +14,6 @@ public class Planet : MonoBehaviour
         InvokeRepeating("SpawnShip", 0, timeBetweenShipSpawn);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SpawnShip()
     {
         attacking = false;

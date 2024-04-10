@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class LevelHolder : MonoBehaviour
 {
+    public int index;
     public LevelSystem level;
 }
