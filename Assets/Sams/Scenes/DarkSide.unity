@@ -625,11 +625,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 519051055144441837, guid: 05470f307519ab542979e7f761877c8c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.050000004
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519051055144441837, guid: 05470f307519ab542979e7f761877c8c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 519051055144441837, guid: 05470f307519ab542979e7f761877c8c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.050000004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 519051055144441837, guid: 05470f307519ab542979e7f761877c8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -655,6 +659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 22.258
       objectReference: {fileID: 0}
+    - target: {fileID: 4584335325591383761, guid: 05470f307519ab542979e7f761877c8c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b78aca74c48ddc244a4d80d35d4bc537, type: 2}
     - target: {fileID: 4668780516293895463, guid: 05470f307519ab542979e7f761877c8c, type: 3}
       propertyPath: m_Name
       value: Back
@@ -664,6 +672,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5046940607914735013, guid: 05470f307519ab542979e7f761877c8c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1009116574429913456, guid: e17f35f0317fcf0499769fabbd373de5, type: 3}
+    - target: {fileID: 5211797715085480182, guid: 05470f307519ab542979e7f761877c8c, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1009116574429913456, guid: e17f35f0317fcf0499769fabbd373de5, type: 3}
@@ -757,7 +769,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 3132077787853056212, guid: 56e412ad2b4c3da4fa4fba06949ec99b, type: 3}
+  m_Mesh: {fileID: 1009116574429913456, guid: e17f35f0317fcf0499769fabbd373de5, type: 3}
 --- !u!1 &1159640757
 GameObject:
   m_ObjectHideFlags: 0
