@@ -7,6 +7,7 @@ using MixedReality.Toolkit.Input;
 using UnityEngine.XR;
 using MixedReality.Toolkit.Subsystems;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     Material focusedMaterial;
     GameObject enemyPlanet;
     Material enemyMat;
+    float time = 0;
 
 
     void Start()
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForReset();
         Debug.Log("Running");
         //Get the middle pos of the screen and make sure the pinch is this frame, first time and on your planet
         if (Gamemanager.GetPointerPos(out GameObject hit, mask))
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
             if (Gamemanager.IsPinching(righthand) && !pinching && gamemanager.WhoOwnsPlanet(Owner.Player, hit) && !firstPinch)
             {
                 Debug.Log("Pinched");
-                
+
                 //Make sure focusplanet gets reset and assign a new one with the correct value
                 if (focusedPlanet != null && focusedPlanet != hit)
                 {
@@ -84,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 if (Gamemanager.IsPinching(righthand) && !pinching)
                 {
                     Gamemanager.Attack(focusedPlanet, enemyPlanet);
-                    
+
                     enemyPlanet.GetComponent<Renderer>().materials = new Material[] { enemyMat };
                     enemyPlanet = null;
                 }
@@ -106,5 +109,21 @@ public class PlayerController : MonoBehaviour
 
         //checking if im pinching this frame
         pinching = Gamemanager.IsPinching(righthand);
+    }
+
+    void CheckForReset()
+    {
+        if (pinching)
+        {
+            time += Time.deltaTime;
+            if (time >= 3)
+            {
+                SceneManager.LoadScene(sceneBuildIndex: 0);
+            }
+        }
+        else
+        {
+            time = 0;
+        }
     }
 }

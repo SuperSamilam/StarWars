@@ -156,6 +156,7 @@ public class Gamemanager : MonoBehaviour
         //Current - wil change to a better end game
         if (enemyPlanets.Count == 0 && !completed)
         {
+            Debug.Log("WOn");
             completed = true;
             if (level.playingAsJedi)
             {
@@ -252,12 +253,12 @@ public class Gamemanager : MonoBehaviour
 
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward * 1000f);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1000000, mask))
+        if (Physics.SphereCast(ray, 1f, out hit, 1000000, mask))
         {
             hitObj = hit.transform.gameObject;
             return true;
         }
+
         return false;
     }
 

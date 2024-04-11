@@ -12,10 +12,12 @@ public class LevelChooser : MonoBehaviour
     [SerializeField] LayerMask mask;
     [SerializeField] TextMeshProUGUI levelName;
     [SerializeField] LevelKepper levelKeeper;
+    [SerializeField] AudioSource source;
 
     //Varibels that will be used inbetween 
     GameObject focusedPlanet;
     Material focusedMaterial;
+    bool audioPlayed = false;
     bool pinching;
 
 
@@ -34,6 +36,13 @@ public class LevelChooser : MonoBehaviour
 
             levelName.gameObject.SetActive(true);
 
+            if (!audioPlayed && hit.GetComponent<LevelHolder>().clip != null)
+            {
+                source.clip = hit.GetComponent<LevelHolder>().clip;
+                source.Play();
+                audioPlayed = true;
+            }
+
             if (Gamemanager.IsPinching(hand) && !pinching)
             {
                 if (hit.GetComponent<LevelHolder>().level != null)
@@ -47,6 +56,7 @@ public class LevelChooser : MonoBehaviour
                 focusedPlanet.GetComponent<Renderer>().materials = new Material[] { focusedMaterial };
             focusedPlanet = null;
             levelName.gameObject.SetActive(false);
+            audioPlayed = false;
         }
         pinching = Gamemanager.IsPinching(hand);
     }
