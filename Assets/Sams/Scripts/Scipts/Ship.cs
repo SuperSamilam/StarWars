@@ -6,12 +6,13 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     //Static as everyship can use the same
-    static Gamemanager gamemanager;
+    static GameLoop gameLoop;
     static float minSpeed = 30;
     static float maxSpeed = 40;
     static float straightSpeed = 0.005f;
 
     float orbitSpeed;
+    [SerializeField] AudioSource source;
 
     //public
     public bool orbiting = true;
@@ -20,7 +21,7 @@ public class Ship : MonoBehaviour
 
     public static void SetGamemanager()
     {
-        gamemanager = FindObjectOfType<Gamemanager>();
+        gameLoop = FindObjectOfType<GameLoop>();
     }
     void Start()
     {
@@ -39,16 +40,26 @@ public class Ship : MonoBehaviour
         }
         else
         {
+            InvokeRepeating("Shoot", 0.5f, 1f);
             transform.position = Vector3.MoveTowards(transform.position, target.position, straightSpeed);
-            if (Vector3.Distance(transform.position, target.position) <= 0.5f)
+            transform.LookAt(target.position);
+            if (Vector3.Distance(transform.position, target.position) <= 1f)
             {
                 orbiting = true;
                 transform.parent = target;
                 transform.localPosition = Vector3.right * 0.02f;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                CancelInvoke();
                 TryTakeoverPlanet();
             }
         }
     }
+
+    void Shoot()
+    {
+        source.Play(); 
+    }
+
 
     void TryTakeoverPlanet()
     {
@@ -64,19 +75,19 @@ public class Ship : MonoBehaviour
             }
         }
 
-        //The planet can change owner
-        gamemanager.ModifyPlanetOwnership(target.gameObject, owner);
+        // //The planet can change owner
+        gameLoop.ModifyPlanetOwnership(target.gameObject, owner);
 
-        //Make sure the player uses the right ship prefab
+        // //Make sure the player uses the right ship prefab
         target.gameObject.GetComponent<Planet>().owner = owner;
-        if (owner == Owner.Player && gamemanager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.jediShip;
+        if (owner == Owner.Player && gameLoop.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = gameLoop.level.jediShip;
         else if (owner == Owner.Player)
-            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.sithShip;
-        else if (owner == Owner.Enemy && gamemanager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.sithShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = gameLoop.level.sithShip;
+        else if (owner == Owner.Enemy && gameLoop.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = gameLoop.level.sithShip;
         else if (owner == Owner.Enemy)
-            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.jediShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = gameLoop.level.jediShip;
     }
 
 }
