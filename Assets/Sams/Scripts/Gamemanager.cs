@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Gamemanager : MonoBehaviour
 {
     [Header("General")]
-    public static LevelSystem level;
+    public LevelSystem level;
 
     [SerializeField] GameObject yodaWin;
     [SerializeField] GameObject yodaLoss;
@@ -34,6 +34,7 @@ public class Gamemanager : MonoBehaviour
 
     void Start()
     {
+        level = FindObjectOfType<LevelKepper>().level;
         LoadLevel();
         Ship.SetGamemanager();
     }

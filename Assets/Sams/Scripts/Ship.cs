@@ -69,14 +69,14 @@ public class Ship : MonoBehaviour
 
         //Make sure the player uses the right ship prefab
         target.gameObject.GetComponent<Planet>().owner = owner;
-        if (owner == Owner.Player && Gamemanager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.jediShip;
+        if (owner == Owner.Player && gamemanager.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.jediShip;
         else if (owner == Owner.Player)
-            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.sithShip;
-        else if (owner == Owner.Enemy && Gamemanager.level.playingAsJedi)
-            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.sithShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.sithShip;
+        else if (owner == Owner.Enemy && gamemanager.level.playingAsJedi)
+            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.sithShip;
         else if (owner == Owner.Enemy)
-            target.gameObject.GetComponent<Planet>().shipPrefab = Gamemanager.level.jediShip;
+            target.gameObject.GetComponent<Planet>().shipPrefab = gamemanager.level.jediShip;
     }
 
 }

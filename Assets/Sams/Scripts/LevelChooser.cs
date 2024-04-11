@@ -11,6 +11,7 @@ public class LevelChooser : MonoBehaviour
     [SerializeField] XRNode hand;
     [SerializeField] LayerMask mask;
     [SerializeField] TextMeshProUGUI levelName;
+    [SerializeField] LevelKepper levelKeeper;
 
     //Varibels that will be used inbetween 
     GameObject focusedPlanet;
@@ -36,7 +37,7 @@ public class LevelChooser : MonoBehaviour
             if (Gamemanager.IsPinching(hand) && !pinching)
             {
                 if (hit.GetComponent<LevelHolder>().level != null)
-                    Gamemanager.level = hit.GetComponent<LevelHolder>().level;
+                    levelKeeper.level = hit.GetComponent<LevelHolder>().level;
                 SceneManager.LoadScene(sceneBuildIndex: hit.GetComponent<LevelHolder>().index);
             }
         }
