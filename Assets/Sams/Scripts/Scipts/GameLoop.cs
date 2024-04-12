@@ -83,7 +83,7 @@ public class GameLoop : MonoBehaviour
             if (noOwnerPlanets.Count >= 1)
             {
                 enemyPlanets[i].GetComponent<Planet>().haveAttacked = true;
-                int amountOfShips = (int)(enemyPlanets[i].transform.childCount / 3f);
+                int amountOfShips = (int)(enemyPlanets[i].transform.childCount * 0.5f);
                 for (int s = 0; s < amountOfShips; s++)
                 {
                     Ship ship = enemyPlanets[s].transform.GetChild(0).GetComponent<Ship>();
@@ -99,12 +99,12 @@ public class GameLoop : MonoBehaviour
                 if (enemyPlanets[i].transform.childCount > playerPlanets[j].transform.childCount * 1.5f)
                 {
                     enemyPlanets[i].GetComponent<Planet>().haveAttacked = true;
-                    int amountOfShips = (int)(enemyPlanets[i].transform.childCount / 2f);
+                    int amountOfShips = (int)(enemyPlanets[i].transform.childCount * 0.5f);
                     for (int s = 0; s < amountOfShips; s++)
                     {
                         Ship ship = enemyPlanets[s].transform.GetChild(0).GetComponent<Ship>();
                         enemyPlanets[s].transform.GetChild(0).transform.parent = null;
-                        ship.orbiting = false;
+                        ship.LeaveOrbit();
                         ship.target = playerPlanets[j].transform;
                     }
                 }

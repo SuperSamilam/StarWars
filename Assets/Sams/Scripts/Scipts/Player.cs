@@ -61,12 +61,12 @@ public class Player : MonoBehaviour
     {
         if (manager.pinchingRight && manager.pinchingRightLastFrame && planetSelected == true)
         {
-            int amountOfShips = (int)(planet.transform.childCount / 2f);
+            int amountOfShips = (int)(planet.transform.childCount * 0.5f);
             for (int i = 0; i < amountOfShips; i++)
             {
                 Ship ship = planet.transform.GetChild(0).GetComponent<Ship>();
                 planet.transform.GetChild(0).transform.parent = null;
-                ship.orbiting = false;
+                ship.LeaveOrbit();
                 ship.target = enemyPlanet.transform;
             }
         }
@@ -77,7 +77,6 @@ public class Player : MonoBehaviour
         Debug.Log("planet");
         if (gameLoop.enemyPlanets.Contains(tempPlanet) || gameLoop.noOwnerPlanets.Contains(tempPlanet))
         {
-            Debug.Log("exists");
             enemyPlanet = tempPlanet;
             Renderer renderer = enemyPlanet.gameObject.GetComponent<Renderer>();
             enemyPlanetMat = renderer.material;

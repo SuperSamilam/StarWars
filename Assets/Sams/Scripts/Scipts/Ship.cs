@@ -13,6 +13,7 @@ public class Ship : MonoBehaviour
 
     float orbitSpeed;
     [SerializeField] AudioSource source;
+    [SerializeField] GameObject blasters;
 
     //public
     public bool orbiting = true;
@@ -40,7 +41,6 @@ public class Ship : MonoBehaviour
         }
         else
         {
-            InvokeRepeating("Shoot", 0.5f, 1f);
             transform.position = Vector3.MoveTowards(transform.position, target.position, straightSpeed);
             transform.LookAt(target.position);
             if (Vector3.Distance(transform.position, target.position) <= 1f)
@@ -55,14 +55,29 @@ public class Ship : MonoBehaviour
         }
     }
 
+    public void LeaveOrbit()
+    {
+        orbiting = false;
+        InvokeRepeating("Shoot", 0.5f, 1f);
+    }
+
     void Shoot()
     {
-        source.Play(); 
+        source.Play();
+        StartCoroutine("ShootShot");
+    }
+
+    IEnumerator ShootShot()
+    {
+        blasters.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        blasters.SetActive(false);
     }
 
 
     void TryTakeoverPlanet()
     {
+        Debug.Log("trying to take over");
         //Going backwars as children will be destroyed
         for (int i = target.childCount - 1; i >= 0; i--)
         {
