@@ -72,6 +72,44 @@ public class GameLoop : MonoBehaviour
         {
             SceneLoader.LoadScene(0);
         }
+
+        for (int i = 0; i < enemyPlanets.Count; i++)
+        {
+            if (enemyPlanets[i].GetComponent<Planet>().haveAttacked)
+            {
+                continue;
+            }
+
+            if (noOwnerPlanets.Count >= 1)
+            {
+                enemyPlanets[i].GetComponent<Planet>().haveAttacked = true;
+                int amountOfShips = (int)(enemyPlanets[i].transform.childCount / 3f);
+                for (int s = 0; s < amountOfShips; s++)
+                {
+                    Ship ship = enemyPlanets[s].transform.GetChild(0).GetComponent<Ship>();
+                    enemyPlanets[s].transform.GetChild(1).transform.parent = null;
+                    ship.orbiting = false;
+                    ship.target = noOwnerPlanets[0].transform;
+                }
+                continue;
+            }
+
+            for (int j = 0; j < playerPlanets.Count; j++)
+            {
+                if (enemyPlanets[i].transform.childCount > playerPlanets[j].transform.childCount * 1.5f)
+                {
+                    enemyPlanets[i].GetComponent<Planet>().haveAttacked = true;
+                    int amountOfShips = (int)(enemyPlanets[i].transform.childCount / 2f);
+                    for (int s = 0; s < amountOfShips; s++)
+                    {
+                        Ship ship = enemyPlanets[s].transform.GetChild(0).GetComponent<Ship>();
+                        enemyPlanets[s].transform.GetChild(0).transform.parent = null;
+                        ship.orbiting = false;
+                        ship.target = playerPlanets[j].transform;
+                    }
+                }
+            }
+        }
     }
 
     public void ModifyPlanetOwnership(GameObject planet, Owner owner)
