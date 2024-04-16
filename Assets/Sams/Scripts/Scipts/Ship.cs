@@ -9,7 +9,7 @@ public class Ship : MonoBehaviour
     static GameLoop gameLoop;
     static float minSpeed = 30;
     static float maxSpeed = 40;
-    static float straightSpeed = 0.005f;
+    static float straightSpeed = 0.025f;
 
     float orbitSpeed;
     [SerializeField] AudioSource source;
