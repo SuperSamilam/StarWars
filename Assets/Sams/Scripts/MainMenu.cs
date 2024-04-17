@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] Slider slider;
 
-
+    //Used in the main scene to controll audio and more
     public void RotateRotation(int rotAmount)
     {
         StartCoroutine(RotateObject(transform, new Vector3(0, rotAmount, 0), 90));

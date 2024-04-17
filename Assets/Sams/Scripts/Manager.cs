@@ -27,6 +27,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Used to check if the player is pinching at current frame
         if (checkingPinch == true)
         {
             pinchingRightLastFrame = pinchingRight;
@@ -42,6 +43,7 @@ public class Manager : MonoBehaviour
         checkingPinch = true;
     }
 
+    //Resets everything back to the first scene
     void ResetEverything()
     {
         if (pinchingLeft)
@@ -59,6 +61,7 @@ public class Manager : MonoBehaviour
         SceneLoader.LoadScene(0);
     }
 
+    //Check if the player is pinching
     public static bool IsPinching(XRNode hand)
     {
         var aggregator = XRSubsystemHelpers.GetFirstRunningSubsystem<HandsAggregatorSubsystem>();
@@ -68,6 +71,7 @@ public class Manager : MonoBehaviour
         return isPinching;
     }
 
+    //Gets if the player is pointing at anything
     public static bool GetPointerPos(out GameObject hitObj, LayerMask mask, bool handRight)
     {
         Transform hand;

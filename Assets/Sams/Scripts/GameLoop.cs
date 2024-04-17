@@ -17,6 +17,7 @@ public class GameLoop : MonoBehaviour
         Ship.SetGamemanager();
     }
 
+    //Loads teh level in
     void LoadLevel()
     {
         for (int i = 0; i < level.planets.Count; i++)
@@ -63,7 +64,8 @@ public class GameLoop : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        //Checking win conditions
         if (enemyPlanets.Count == 0)
         {
             SceneLoader.LoadScene(0);
@@ -73,13 +75,16 @@ public class GameLoop : MonoBehaviour
             SceneLoader.LoadScene(0);
         }
 
+        //Trying to get enmenyships to attack
         for (int i = 0; i < enemyPlanets.Count; i++)
         {
+            //It cant attack to often
             if (enemyPlanets[i].GetComponent<Planet>().haveAttacked)
             {
                 continue;
             }
 
+            //Attack a planet with no owner first as that is the smarter move to do
             if (noOwnerPlanets.Count >= 1)
             {
                 enemyPlanets[i].GetComponent<Planet>().haveAttacked = true;
@@ -94,6 +99,7 @@ public class GameLoop : MonoBehaviour
                 continue;
             }
 
+            //attack player planets if it is allowed to
             for (int j = 0; j < playerPlanets.Count; j++)
             {
                 if (enemyPlanets[i].transform.childCount > playerPlanets[j].transform.childCount * 1.5f)
@@ -112,6 +118,7 @@ public class GameLoop : MonoBehaviour
         }
     }
 
+    //CHanges owenr of a planet
     public void ModifyPlanetOwnership(GameObject planet, Owner owner)
     {
         playerPlanets.Remove(planet);

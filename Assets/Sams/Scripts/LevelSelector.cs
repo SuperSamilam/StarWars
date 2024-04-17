@@ -12,6 +12,7 @@ public class LevelSelector : MonoBehaviour
     GameObject planet;
     Material planetMat;
 
+    //Gets if the player is pointing to any planet and is pinching to start the level
     void Update()
     {
         GameObject tempPlanet;

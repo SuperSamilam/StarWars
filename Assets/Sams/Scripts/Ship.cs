@@ -54,7 +54,8 @@ public class Ship : MonoBehaviour
             }
         }
     }
-
+    
+    //Leaving the orbit of a planet to attack another
     public void LeaveOrbit()
     {
         orbiting = false;
@@ -75,9 +76,9 @@ public class Ship : MonoBehaviour
     }
 
 
+    //Looks at the amount of ships for a planet and decide wich team has the most
     void TryTakeoverPlanet()
     {
-        Debug.Log("trying to take over");
         //Going backwars as children will be destroyed
         for (int i = target.childCount - 1; i >= 0; i--)
         {

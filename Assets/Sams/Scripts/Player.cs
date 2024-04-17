@@ -19,9 +19,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Try to see if the player points at a planet
         GameObject tempPlanet;
         if (Manager.GetPointerPos(out tempPlanet, planetLayer, true))
         {
+            //If the planet exists in the players show it as selected and same with enemyplanets
             if (!gameLoop.playerPlanets.Contains(tempPlanet))
             {
                 CheckEnemyPlanet(tempPlanet);
